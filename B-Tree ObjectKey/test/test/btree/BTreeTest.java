@@ -1,13 +1,9 @@
 package test.btree;
 
 import algorithm.btree.BTree;
-import algorithm.btree.sample.BTreeKeySampleFactory;
+import algorithm.btree.sample.BTreeIntegerKeyFactory;
 
 public class BTreeTest {
-
-  public BTreeTest() {
-    // TODO Auto-generated constructor stub
-  }
 
   public static void main(String[] args) {
 //  int[] keys = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
@@ -18,7 +14,7 @@ public class BTreeTest {
   }
 
   static void add(int[] args) {
-    BTree b = new BTree(3, new BTreeKeySampleFactory());
+    BTree b = new BTree(3, new BTreeIntegerKeyFactory());
     for (int i : args) {
       b.insert(i);
     }

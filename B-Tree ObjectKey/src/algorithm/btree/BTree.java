@@ -13,7 +13,7 @@ public class BTree {
 
   public BTree(int order, BTreeKeyFactory keyFactory) {
     nf = BTreeNodeFactory.getNodeFactory(3, keyFactory);
-    root = nf.getNode();
+    root = nf.getNewNode();
   }
 
   /**
@@ -23,7 +23,7 @@ public class BTree {
   public void insert(final int value) {
     root.add(value);
     if (!root.hasSpace()) {
-      BTreeNode node = nf.getNode();
+      BTreeNode node = nf.getNewNode();
       node.setFirstChild(root);
       root = node;
       node.splitChildAt(0);

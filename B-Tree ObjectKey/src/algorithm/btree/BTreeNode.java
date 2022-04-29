@@ -90,7 +90,7 @@ public class BTreeNode {
     //
     // Right side of the node.
     ///////////////////////////////////
-    BTreeNode rightNode = nf.getNode();
+    BTreeNode rightNode = nf.getNewNode();
     rightNode.nodeSize = nf.getRightNodeSize();
     // Copy the keys from the right side.
     for (int j = 0; j < nf.getRightNodeSize(); j++) {
