@@ -64,20 +64,29 @@ public class BTreeNode {
    * @return
    */
   boolean hasKey(int key) {
+    return getKey(key) != Integer.MIN_VALUE;
+  }
+  
+  /**
+   * Returns the key, or Integer.MIN_VALUE if not found.
+   * @param value
+   * @return
+   */
+  int getKey(final int key) {
     List<Integer> keys = getKeysInNode();
 
     for (int pos = keys.size() - 1; pos >= 0; pos--) {
       if (key == keys.get(pos))
-        return true;
+        return keys.get(pos);
       if (! isLeaf())
         if (key > keys.get(pos))
-          return getChildInNodes().get(pos+1).hasKey(key);
+          return getChildInNodes().get(pos+1).getKey(key);
     }
 
     if (isLeaf())
-      return false;
+      return Integer.MIN_VALUE;
 
-    return getChildInNodes().get(0).hasKey(key);
+    return getChildInNodes().get(0).getKey(key);
   }
 
   /**
@@ -90,7 +99,7 @@ public class BTreeNode {
     //
     // Right side of the node.
     ///////////////////////////////////
-    BTreeNode rightNode = nf.getNode();
+    BTreeNode rightNode = nf.getNewNode();
     rightNode.nodeSize = nf.getRightNodeSize();
     // Copy the keys from the right side.
     for (int j = 0; j < nf.getRightNodeSize(); j++) {

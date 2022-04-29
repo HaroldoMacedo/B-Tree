@@ -29,7 +29,7 @@ class BTreeNodeFactory {
     middleNodePos = leftNodeSize;
   }
 
-  public BTreeNode getNode() {
+  public BTreeNode getNewNode() {
     return new BTreeNode(this);
   }
 
