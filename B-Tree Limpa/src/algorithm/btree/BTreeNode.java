@@ -66,18 +66,83 @@ public class BTreeNode {
   boolean hasKey(int key) {
     List<Integer> keys = getKeysInNode();
 
-    for (int pos = keys.size() - 1; pos >= 0; pos--) {
+    for (int pos = 0; pos < keys.size(); pos++) {
       if (key == keys.get(pos))
         return true;
-      if (! isLeaf())
-        if (key > keys.get(pos))
-          return getChildInNodes().get(pos+1).hasKey(key);
+
+      if (!isLeaf())
+        if (key < keys.get(pos))
+          return getChildInNodes().get(pos).hasKey(key);
     }
 
     if (isLeaf())
       return false;
 
-    return getChildInNodes().get(0).hasKey(key);
+    return getChildInNodes().get(keys.size()).hasKey(key);
+  }
+
+  /**
+   * Returns the biggest key that is smaller than 'key'.
+   * 
+   * @param key
+   * @return
+   */
+  int previousKey(int key) {
+    List<Integer> keys = getKeysInNode();
+
+    int pos = 0;
+    for (; pos < keys.size(); pos++) {
+      if (key <= keys.get(pos))
+        break;
+    }
+
+    if (isLeaf()) {
+      if (pos == 0)
+        return -1;
+      else
+        return keys.get(pos - 1);
+    }
+    
+    int previousKey = getChildInNodes().get(pos).previousKey(key);
+    if (previousKey != -1)
+      return previousKey;
+    
+    if (pos > 0)
+      return keys.get(pos - 1);
+      
+    return -1;
+  }
+
+  /**
+   * Returns the smallest key that is bigger than 'key'.
+   * 
+   * @param key
+   * @return
+   */
+  int nextKey(int key) {
+    List<Integer> keys = getKeysInNode();
+
+    int pos = 0;
+    for (; pos < keys.size(); pos++) {
+      if (key < keys.get(pos))
+        break;
+    }
+
+    if (isLeaf()) {
+      if (pos == keys.size())
+        return -1;
+      else
+        return keys.get(pos);
+    }
+    
+    int nextKey = getChildInNodes().get(pos).nextKey(key);
+    if (nextKey != -1)
+      return nextKey;
+    
+    if (pos < keys.size())
+      return keys.get(pos);
+      
+    return -1;
   }
 
   /**
