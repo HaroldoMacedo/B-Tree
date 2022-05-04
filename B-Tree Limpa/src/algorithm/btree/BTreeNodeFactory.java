@@ -29,8 +29,8 @@ class BTreeNodeFactory {
     middleNodePos = leftNodeSize;
   }
 
-  public BTreeNode getNode() {
-    return new BTreeNode(this);
+  public Node getNode() {
+    return new Node(this);
   }
 
   public int getOrder() {

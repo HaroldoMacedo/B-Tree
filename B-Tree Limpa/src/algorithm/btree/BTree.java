@@ -8,7 +8,9 @@ package algorithm.btree;
  */
 public class BTree {
 
-  protected BTreeNode root;
+  protected Node root;
+  private Element middleElement = null;
+  private boolean evenKeys = true;
   private BTreeNodeFactory nf;
 
   public BTree(int order) {
@@ -23,21 +25,42 @@ public class BTree {
   public void insert(final int value) {
     root.add(value);
     if (!root.hasSpace()) {
-      BTreeNode node = nf.getNode();
+      Node node = nf.getNode();
       node.setFirstChild(root);
       root = node;
       node.splitChildAt(0);
     }
+
+    //  First key insertion in the BTree.
+    if (middleElement == null) {
+      middleElement = root.getElementsInNode().get(0);
+      evenKeys = false;
+      
+      return;
+    }
+
+    evenKeys = !evenKeys;
+    if (value > middleElement.key && !evenKeys)
+      middleElement = middleElement.nextElement;
+    if (value <= middleElement.key && evenKeys)
+      middleElement = middleElement.previousElement;
   }
-  
+
+  public double calculateMedian() {
+    if (evenKeys)
+      return (double)(middleElement.key + middleElement.nextElement.key) / 2;
+    else
+      return middleElement.key;
+  }
+
   public boolean isKeyInTree(final int key) {
     return root.hasKey(key);
   }
-  
+
   public int getPreviousKey(int key) {
     return root.previousKey(key);
   }
-  
+
   public int getNextKey(int key) {
     return root.nextKey(key);
   }
