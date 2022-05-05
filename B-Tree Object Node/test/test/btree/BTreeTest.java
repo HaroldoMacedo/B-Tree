@@ -1,7 +1,7 @@
 package test.btree;
 
 import algorithm.btree.BTree;
-import algorithm.btree.sample.BTreeIntegerKeyFactory;
+import algorithm.btree.sample.BTreeIntegerKey;
 
 public class BTreeTest {
 
@@ -14,9 +14,9 @@ public class BTreeTest {
   }
 
   static void add(int[] args) {
-    BTree b = new BTree(3, new BTreeIntegerKeyFactory());
+    BTree b = new BTree(3);
     for (int i : args) {
-      b.insert(i);
+      b.addKey(new BTreeIntegerKey(i));
     }
 
     keyInTree(b, 1);

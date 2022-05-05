@@ -1,8 +1,7 @@
 package algorithm.btree;
 
 /**
- * Interface to be implemented by any object that is meant to be stored in the
- * BTree.
+ * Interface to implement to store any object in BTree.
  * 
  * @author Haroldo Macedo
  *

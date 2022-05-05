@@ -31,10 +31,10 @@ public class BTreeNode {
    * 
    * @param value
    */
-  void add(int value) {
+  void add(BTreeKey key) {
     // Find where to include the key.
     int pos = 0;
-    for (pos = 0; pos < nodeSize && value > keys[pos].getKey(); pos++)
+    for (pos = 0; pos < nodeSize && key.getKey() > keys[pos].getKey(); pos++)
       ;
 
     //
@@ -43,7 +43,7 @@ public class BTreeNode {
       // Open space to add the key and then add the key.
       for (int i = nodeSize - 1; i >= pos; i--)
         keys[i + 1] = keys[i];
-      keys[pos] = nf.getNewKey(value);
+      keys[pos] = key;
       nodeSize++;
 
       return;
@@ -52,7 +52,7 @@ public class BTreeNode {
     //
     // Not a leaf node.
     // Add the key to a child, and if the child node is full split it.
-    children[pos].add(value);
+    children[pos].add(key);
     if (!children[pos].hasSpace())
       splitChildAt(pos);
   }
@@ -64,20 +64,29 @@ public class BTreeNode {
    * @return
    */
   boolean hasKey(int value) {
+    return getKey(value) != null;
+  }
+
+  /**
+   * Returns the object that correspond has the key.
+   * @param value
+   * @return
+   */
+  BTreeKey getKey(int value) {
     List<BTreeKey> keys = getKeysInNode();
 
     for (int pos = keys.size() - 1; pos >= 0; pos--) {
       if (value == keys.get(pos).getKey())
-        return true;
+        return keys.get(pos);
       if (! isLeaf())
         if (value > keys.get(pos).getKey())
-          return getChildInNodes().get(pos+1).hasKey(value);
+          return getChildInNodes().get(pos+1).getKey(value);
     }
 
     if (isLeaf())
-      return false;
+      return null;
 
-    return getChildInNodes().get(0).hasKey(value);
+    return getChildInNodes().get(0).getKey(value);
   }
 
   /**

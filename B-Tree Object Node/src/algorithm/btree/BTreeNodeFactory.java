@@ -1,31 +1,37 @@
 package algorithm.btree;
 
+import javax.management.RuntimeErrorException;
+
 /**
  * Class that creates BTreeNodes.
  * 
- * All BTreeNodes created by this factory has the same order. The order value is
- * kept in the factory object for the nodes to use.
+ * All BTreeNodes created by this factory has the same order.
+ * 
+ * The order value is kept in the factory object. The nodes use it.
  * 
  * @author Haroldo Macedo
  *
  */
 class BTreeNodeFactory {
-
   // Definition for all nodes created from this factory.
-  private BTreeKeyFactory keyFactory;
   private int order;
   private int leftNodeSize;
   private int rightNodeSize;
   private int middleNodePos;
 
-  public static BTreeNodeFactory getNodeFactory(int order, BTreeKeyFactory keyFactory) {
-    return new BTreeNodeFactory(order, keyFactory);
-  }
+  /**
+   * Return a Node factory that creates nodes with the order size 'order'.
+   * 
+   * @param order
+   * @return
+   */
+  public BTreeNodeFactory(int order) {
+    if (order < 3)
+      throw new RuntimeErrorException(new Error("Order must be bigger or equal to 3!"));
 
-  private BTreeNodeFactory(int order, BTreeKeyFactory keyFactory) {
     this.order = order;
-    this.keyFactory = keyFactory;
 
+    //  For splitting the node.
     leftNodeSize = (order - 1) / 2;
     rightNodeSize = (order - 1) - leftNodeSize;
     middleNodePos = leftNodeSize;
@@ -33,10 +39,6 @@ class BTreeNodeFactory {
 
   public BTreeNode getNewNode() {
     return new BTreeNode(this);
-  }
-
-  public BTreeKey getNewKey(int value) {
-    return keyFactory.getBTreeKey(value);
   }
 
   public int getOrder() {
@@ -54,5 +56,4 @@ class BTreeNodeFactory {
   public int getMiddleNodePos() {
     return middleNodePos;
   }
-
 }
