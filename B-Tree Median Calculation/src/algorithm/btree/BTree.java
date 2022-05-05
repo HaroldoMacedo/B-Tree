@@ -57,6 +57,9 @@ public class BTree {
     return root.hasKey(key);
   }
 
+  public int getPreviousKey(int key) {
+    return root.previousKey(key);
+  }
 
   public int getNextKey(int key) {
     return root.nextKey(key);

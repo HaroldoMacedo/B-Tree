@@ -3,6 +3,7 @@
 	<name>B-Tree Median Calculation Teste</name>
 	<comment></comment>
 	<projects>
+		<project>B-Tree Median Calculation</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
