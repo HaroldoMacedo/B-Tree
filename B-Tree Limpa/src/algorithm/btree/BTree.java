@@ -10,7 +10,7 @@ public class BTree {
 
   protected Node root;
   private Element middleElement = null;
-  private boolean evenKeys = true;
+  private boolean evenElements = true;
   private BTreeNodeFactory nf;
 
   public BTree(int order) {
@@ -34,20 +34,20 @@ public class BTree {
     //  First key insertion in the BTree.
     if (middleElement == null) {
       middleElement = root.getElementsInNode().get(0);
-      evenKeys = false;
+      evenElements = false;
       
       return;
     }
 
-    evenKeys = !evenKeys;
-    if (value > middleElement.key && !evenKeys)
+    evenElements = !evenElements;
+    if (value > middleElement.key && !evenElements)
       middleElement = middleElement.nextElement;
-    if (value <= middleElement.key && evenKeys)
+    if (value <= middleElement.key && evenElements)
       middleElement = middleElement.previousElement;
   }
 
   public double calculateMedian() {
-    if (evenKeys)
+    if (evenElements)
       return (double)(middleElement.key + middleElement.nextElement.key) / 2;
     else
       return middleElement.key;
@@ -57,9 +57,6 @@ public class BTree {
     return root.hasKey(key);
   }
 
-  public int getPreviousKey(int key) {
-    return root.previousKey(key);
-  }
 
   public int getNextKey(int key) {
     return root.nextKey(key);

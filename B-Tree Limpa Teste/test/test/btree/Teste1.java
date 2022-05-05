@@ -39,7 +39,7 @@ public class Teste1 {
   
   static void keyInTree(BTree b, int key) {
     System.out.printf("Key %d is %s in tree.\n", key, (b.isKeyInTree(key) ? "" : "NOT"));
-    System.out.printf("Previous key of key %d is %d.\n", key, b.getPreviousKey(key));
-    System.out.printf("Next key of key %d is %d.\n", key, b.getNextKey(key));
+//    System.out.printf("Previous key of key %d is %d.\n", key, b.getPreviousKey(key));
+//    System.out.printf("Next key of key %d is %d.\n", key, b.getNextKey(key));
   }
 }

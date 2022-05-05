@@ -241,6 +241,7 @@ class Node implements BTreeNode {
    * 
    * @return
    */
+  
   List<Element> getElementsInNode() {
     List<Element> elementList = new ArrayList<Element>();
     for (int i = 0; i < nodeSize; i++)
@@ -248,7 +249,6 @@ class Node implements BTreeNode {
 
     return elementList;
   }
-
 
   /**
    *
