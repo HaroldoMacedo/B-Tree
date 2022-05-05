@@ -20,10 +20,10 @@ public class BTree {
 
   /**
    * 
-   * @param value
+   * @param key
    */
-  public void insert(final int value) {
-    root.add(value);
+  public void addKey(final int key) {
+    root.add(key);
     if (!root.hasSpace()) {
       Node node = nf.getNode();
       node.setFirstChild(root);
@@ -40,9 +40,9 @@ public class BTree {
     }
 
     evenElements = !evenElements;
-    if (value > middleElement.key && !evenElements)
+    if (key > middleElement.key && !evenElements)
       middleElement = middleElement.nextElement;
-    if (value <= middleElement.key && evenElements)
+    if (key <= middleElement.key && evenElements)
       middleElement = middleElement.previousElement;
   }
 
