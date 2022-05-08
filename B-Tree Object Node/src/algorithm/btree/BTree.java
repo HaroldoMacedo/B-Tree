@@ -2,7 +2,9 @@ package algorithm.btree;
 
 /**
  * Implements a BTree solution.
+ * 
  * This one accepts any kind of object to be stored and searched in the BTree.
+ * 
  * The key must be an integer number.
  * 
  * @author Haroldo Macedo
@@ -24,6 +26,7 @@ public class BTree {
 
   /**
    * Add one object in the BTree.
+   * 
    * @param value
    */
   public void addKey(final BTreeKey key) {
@@ -35,18 +38,20 @@ public class BTree {
       node.splitChildAt(0);
     }
   }
-  
+
   /**
    * Check if a key is present in the BTree.
+   * 
    * @param key
    * @return
    */
   public boolean isKeyInTree(final int key) {
     return root.hasKey(key);
   }
-  
+
   /**
    * Returns the object with key 'key'.
+   * 
    * @param key
    * @return
    */
@@ -54,4 +59,3 @@ public class BTree {
     return root.getKey(key);
   }
 }
-
