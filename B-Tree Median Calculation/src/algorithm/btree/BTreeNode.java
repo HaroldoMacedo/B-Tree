@@ -5,6 +5,6 @@ import java.util.List;
 public interface BTreeNode {
 
   public List<Integer> getKeysInNode();
-  public List<Node> getChildInNodes();
 
+  public List<Node> getChildInNodes();
 }
