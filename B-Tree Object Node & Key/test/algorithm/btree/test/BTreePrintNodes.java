@@ -20,8 +20,8 @@ public class BTreePrintNodes extends BTree {
    * 
    * @param key
    */
-  public void keyInTree(int key) {
-    System.out.printf("Key %d is %s in tree.\n", key, (this.isKeyInTree(key) ? "" : "NOT"));
+  public void keyInTree(BTreeKey key) {
+    System.out.printf("Key %s is %s in tree.\n", key, (this.isKeyInTree(key) ? "" : "NOT"));
   }
 
   /**

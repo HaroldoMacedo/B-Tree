@@ -12,7 +12,7 @@ package algorithm.btree;
  */
 public class BTree {
 
-  protected BTreeNode root;
+  private BTreeNode root;
   private BTreeNodeFactory nf;
 
   /**
@@ -57,5 +57,14 @@ public class BTree {
    */
   public BTreeKey getKey(final int key) {
     return root.getKey(key);
+  }
+
+  /**
+   * To enable extensions for test and validation purposes.
+   * 
+   * @return
+   */
+  protected BTreeNode getRoot() {
+    return root;
   }
 }

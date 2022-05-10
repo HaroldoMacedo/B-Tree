@@ -13,12 +13,17 @@ public class BTree {
   private boolean evenElements = true;
   private BTreeNodeFactory nf;
 
+  /**
+   * 
+   * @param order
+   */
   public BTree(int order) {
-    nf = BTreeNodeFactory.getNodeFactory(3);
+    nf = new BTreeNodeFactory(3);
     root = nf.getNode();
   }
 
   /**
+   * Add one object in the BTree.
    * 
    * @param key
    */
@@ -46,6 +51,10 @@ public class BTree {
       middleElement = middleElement.previousElement;
   }
 
+  /**
+   * 
+   * @return
+   */
   public double calculateMedian() {
     if (evenElements)
       return (double)(middleElement.key + middleElement.nextElement.key) / 2;
@@ -53,15 +62,40 @@ public class BTree {
       return middleElement.key;
   }
 
+  /**
+   * Check if a key is present in the BTree.
+   * 
+   * @param key
+   * @return
+   */
   public boolean isKeyInTree(final int key) {
     return root.hasKey(key);
   }
 
+  /**
+   * 
+   * @param key
+   * @return
+   */
   public int getPreviousKey(int key) {
     return root.previousKey(key);
   }
 
+  /**
+   * 
+   * @param key
+   * @return
+   */
   public int getNextKey(int key) {
     return root.nextKey(key);
+  }
+
+  /**
+   * To enable extensions for test and validation purposes.
+   * 
+   * @return
+   */
+  protected BTreeNode getRoot() {
+    return root;
   }
 }

@@ -58,4 +58,13 @@ public class BTree {
   public BTreeKey getKey(final BTreeKey key) {
     return root.getKey(key);
   }
+
+  /**
+   * To enable extensions for test and validation purposes.
+   * 
+   * @return
+   */
+  protected BTreeNode getRoot() {
+    return root;
+  }
 }

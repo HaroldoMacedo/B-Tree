@@ -5,40 +5,39 @@ import java.util.List;
 import algorithm.btree.BTree;
 import algorithm.btree.BTreeNode;
 
-
 public class BTreePrintNodes extends BTree {
 
+  /**
+   * 
+   * @param order
+   */
   public BTreePrintNodes(int order) {
     super(order);
   }
 
-  public void showNodes() {
-    showNodes(root);
+  /**
+   * 
+   * @param key
+   */
+  public void keyInTree(int key) {
+    System.out.printf("Key %d is %s in tree.\n", key, (this.isKeyInTree(key) ? "" : "NOT"));
+    System.out.printf("Previous key of key %d is %d.\n", key, this.getPreviousKey(key));
+    System.out.printf("Next key of key %d is %d.\n", key, this.getNextKey(key));
   }
 
-  private int level = 0;
-
-  private void showNodes(BTreeNode node) {
-    if (node == null)
-      return;
-
-    System.out.printf("%2d ( ", ++level);
-    for (int key : node.getKeysInNode()) {
-      System.out.print(key + " ");
-    }
-    System.out.println(")");
-
-    for (BTreeNode child : node.getChildInNodes()) {
-      showNodes(child);
-    }
-
-    level--;
-  }
-
+  /**
+   * Print all tree starting from the root node.
+   * 
+   */
   public void showTree() {
-    showChildrenTree(root);
+    showChildrenTree(this.getRoot());
   }
 
+  /**
+   * Print the tree from node 'node'.
+   * 
+   * @param node
+   */
   private void showChildrenTree(BTreeNode node) {
     // Count levels
     int maxLevel = 1;
@@ -52,6 +51,12 @@ public class BTreePrintNodes extends BTree {
     }
   }
 
+  /**
+   * Print all nodes keys of this level.
+   * 
+   * @param level
+   * @param node
+   */
   private void printNodeLevel(int level, BTreeNode node) {
     // Print keys.
     if (level == 1) {
@@ -65,6 +70,10 @@ public class BTreePrintNodes extends BTree {
       printNodeLevel(level, n);
   }
 
+  /**
+   * 
+   * @param keys
+   */
   private void printNodeKeys(List<Integer> keys) {
     System.out.print("( ");
     for (int k : keys) {
@@ -72,5 +81,4 @@ public class BTreePrintNodes extends BTree {
     }
     System.out.print(") ");
   }
-
 }

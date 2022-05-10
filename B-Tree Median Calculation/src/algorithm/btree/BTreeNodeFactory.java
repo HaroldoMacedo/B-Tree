@@ -17,11 +17,7 @@ class BTreeNodeFactory {
   private int rightNodeSize;
   private int middleNodePos;
 
-  public static BTreeNodeFactory getNodeFactory(int order) {
-    return new BTreeNodeFactory(order);
-  }
-
-  private BTreeNodeFactory(int order) {
+  public BTreeNodeFactory(int order) {
     this.order = order;
 
     leftNodeSize = (order - 1) / 2;
