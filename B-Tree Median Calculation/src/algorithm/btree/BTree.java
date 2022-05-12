@@ -8,8 +8,8 @@ package algorithm.btree;
  */
 public class BTree {
 
-  protected Node root;
-  private Element middleElement = null;
+  protected BTreeNodeImpl root;
+  private MedianElement middleElement = null;
   private boolean evenElements = true;
   private BTreeNodeFactory nf;
 
@@ -30,7 +30,7 @@ public class BTree {
   public void addKey(final int key) {
     root.add(key);
     if (!root.hasSpace()) {
-      Node node = nf.getNode();
+      BTreeNodeImpl node = nf.getNode();
       node.setFirstChild(root);
       root = node;
       node.splitChildAt(0);

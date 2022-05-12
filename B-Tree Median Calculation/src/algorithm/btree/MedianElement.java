@@ -6,11 +6,11 @@ package algorithm.btree;
  * @author Haroldo
  *
  */
-class Element {
+class MedianElement {
   int key;
-  Element nextElement, previousElement;
+  MedianElement nextElement, previousElement;
 
-  Element(int key) {
+  MedianElement(int key) {
     this.key = key;
   }
 }

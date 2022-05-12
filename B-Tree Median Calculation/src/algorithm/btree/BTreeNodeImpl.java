@@ -10,20 +10,20 @@ import java.util.List;
  * @author Haroldo Macedo
  *
  */
-class Node implements BTreeNode {
+class BTreeNodeImpl implements BTreeNode {
   private int nodeSize = 0;
-  private Element elements[];
-  private Node children[];
+  private MedianElement elements[];
+  private BTreeNodeImpl children[];
   private BTreeNodeFactory nf;
 
   /**
    * 
    * @param nf
    */
-  Node(BTreeNodeFactory nf) {
+  BTreeNodeImpl(BTreeNodeFactory nf) {
     this.nf = nf;
-    elements = new Element[nf.getOrder()];
-    children = new Node[nf.getOrder() + 1];
+    elements = new MedianElement[nf.getOrder()];
+    children = new BTreeNodeImpl[nf.getOrder() + 1];
   }
 
   /**
@@ -43,7 +43,7 @@ class Node implements BTreeNode {
       // Open space to add the key and then add the key.
       for (int i = nodeSize - 1; i >= pos; i--)
         elements[i + 1] = elements[i];
-      elements[pos] = new Element(key);
+      elements[pos] = new MedianElement(key);
       nodeSize++;
 
       // Update the double linked chain of previous and next elements.
@@ -166,12 +166,12 @@ class Node implements BTreeNode {
    * @param pos
    */
   void splitChildAt(int pos) {
-    Node childToSplit = children[pos];
+    BTreeNodeImpl childToSplit = children[pos];
 
     //
     // Right side of the node.
     ///////////////////////////////////
-    Node rightNode = nf.getNode();
+    BTreeNodeImpl rightNode = nf.getNode();
     rightNode.nodeSize = nf.getRightNodeSize();
     // Copy the keys from the right side.
     for (int j = 0; j < nf.getRightNodeSize(); j++) {
@@ -233,7 +233,7 @@ class Node implements BTreeNode {
    * 
    * @param child
    */
-  void setFirstChild(Node child) {
+  void setFirstChild(BTreeNodeImpl child) {
     this.children[0] = child;
   }
 
@@ -242,8 +242,8 @@ class Node implements BTreeNode {
    * @return
    */
   
-  List<Element> getElementsInNode() {
-    List<Element> elementList = new ArrayList<Element>();
+  List<MedianElement> getElementsInNode() {
+    List<MedianElement> elementList = new ArrayList<MedianElement>();
     for (int i = 0; i < nodeSize; i++)
       elementList.add(elements[i]);
 
@@ -268,8 +268,8 @@ class Node implements BTreeNode {
    * @return
    */
   @Override
-  public List<Node> getChildInNodes() {
-    List<Node> childNodes = new ArrayList<Node>();
+  public List<BTreeNodeImpl> getChildInNodes() {
+    List<BTreeNodeImpl> childNodes = new ArrayList<BTreeNodeImpl>();
     for (int i = 0; i < nodeSize + 1; i++) {
       childNodes.add(children[i]);
     }

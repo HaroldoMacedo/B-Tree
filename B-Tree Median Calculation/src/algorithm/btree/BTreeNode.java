@@ -6,5 +6,5 @@ public interface BTreeNode {
 
   public List<Integer> getKeysInNode();
 
-  public List<Node> getChildInNodes();
+  public List<BTreeNodeImpl> getChildInNodes();
 }
