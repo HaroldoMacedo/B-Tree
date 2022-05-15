@@ -12,10 +12,17 @@ public class BTreeIntegerKey implements BTreeKey {
 
   private int key;
 
+  /**
+   * 
+   * @param key
+   */
   public BTreeIntegerKey(int key) {
     this.key = key;
   }
 
+  /**
+   * 
+   */
   @Override
   public int getKey() {
     return key;

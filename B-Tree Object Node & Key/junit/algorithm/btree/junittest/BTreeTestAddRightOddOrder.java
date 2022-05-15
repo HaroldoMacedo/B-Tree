@@ -10,11 +10,11 @@ import org.junit.jupiter.api.Test;
 import algorithm.btree.BTree;
 import algorithm.btree.sample.BTreeIntegerKey;
 
-class BTreeTest {
+class BTreeTestAddRightOddOrder {
 
   private static BTree bt = new BTree(3);
-  static int[] keysIn = new int[] { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 20, 30, 40, 50, 60, 70, 80, 90, 100, 25, 95, 35, 85, 45, 75, 55, 65};
-  static int[] keysNotIn = new int[] { 12, 13, 14, 15, 16, 17, 71, 81, 91};
+  static int[] keysIn = new int[] { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+  static int[] keysNotIn = new int[] { 12, 13, 14, 15, 16, 17, 71, 81, 91, 101};
 
   @BeforeAll
   static void init() {
