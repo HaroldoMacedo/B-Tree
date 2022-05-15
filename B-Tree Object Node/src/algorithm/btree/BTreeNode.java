@@ -60,33 +60,33 @@ public class BTreeNode {
   /**
    * Search for a key and returns true if found.
    * 
-   * @param value
+   * @param key
    * @return
    */
-  boolean hasKey(int value) {
-    return getKey(value) != null;
+  boolean hasKey(int key) {
+    return getKey(key) != null;
   }
 
   /**
    * Returns the object that correspond has the key.
-   * @param value
+   * @param key
    * @return
    */
-  BTreeKey getKey(int value) {
+  BTreeKey getKey(int key) {
     List<BTreeKey> keys = getKeysInNode();
 
     for (int pos = keys.size() - 1; pos >= 0; pos--) {
-      if (value == keys.get(pos).getKey())
+      if (key == keys.get(pos).getKey())
         return keys.get(pos);
       if (! isLeaf())
-        if (value > keys.get(pos).getKey())
-          return getChildInNodes().get(pos+1).getKey(value);
+        if (key > keys.get(pos).getKey())
+          return getChildInNodes().get(pos+1).getKey(key);
     }
 
     if (isLeaf())
       return null;
 
-    return getChildInNodes().get(0).getKey(value);
+    return getChildInNodes().get(0).getKey(key);
   }
 
   /**
