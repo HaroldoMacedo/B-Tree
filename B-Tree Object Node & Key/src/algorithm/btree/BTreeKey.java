@@ -3,6 +3,8 @@ package algorithm.btree;
 /**
  * Interface to implement to store any object in BTree.
  * 
+ * And, that the key can be of any type.
+ * 
  * @author Haroldo Macedo
  *
  */

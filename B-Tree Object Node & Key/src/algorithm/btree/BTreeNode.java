@@ -22,8 +22,8 @@ public class BTreeNode {
    */
   BTreeNode(BTreeNodeFactory nf) {
     this.nf = nf;
-    keys = new BTreeKey[nf.getOrder()];
-    children = new BTreeNode[nf.getOrder() + 1];
+    keys = new BTreeKey[nf.order];
+    children = new BTreeNode[nf.order + 1];
   }
 
   /**
@@ -100,16 +100,16 @@ public class BTreeNode {
     // Right side of the node.
     ///////////////////////////////////
     BTreeNode rightNode = nf.getNewNode();
-    rightNode.nodeSize = nf.getRightNodeSize();
+    rightNode.nodeSize = nf.rightNodeSize;
     // Copy the keys from the right side.
-    for (int j = 0; j < nf.getRightNodeSize(); j++) {
-      rightNode.keys[j] = childToSplit.keys[j + nf.getLeftNodeSize() + 1];
+    for (int j = 0; j < nf.rightNodeSize; j++) {
+      rightNode.keys[j] = childToSplit.keys[j + nf.leftNodeSize + 1];
     }
 
     if (!childToSplit.isLeaf()) {
       // Copy the children from the right side.
-      for (int j = 0; j < nf.getRightNodeSize() + 1; j++) {
-        rightNode.children[j] = childToSplit.children[j + nf.getLeftNodeSize() + 1];
+      for (int j = 0; j < nf.rightNodeSize + 1; j++) {
+        rightNode.children[j] = childToSplit.children[j + nf.leftNodeSize + 1];
       }
     }
 
@@ -117,7 +117,7 @@ public class BTreeNode {
     // Left side of the node.
     ///////////////////////////////////
     // Adjust left node size.
-    childToSplit.nodeSize = nf.getLeftNodeSize();
+    childToSplit.nodeSize = nf.leftNodeSize;
 
     //
     // Promote the middle key.
@@ -125,7 +125,7 @@ public class BTreeNode {
     // Shift keys to the right to open space to add the promoted key.
     for (int j = nodeSize - 1; j >= pos; j--)
       keys[j + 1] = keys[j];
-    keys[pos] = childToSplit.keys[nf.getMiddleNodePos()];
+    keys[pos] = childToSplit.keys[nf.middleNodePos];
 
     if (!isLeaf()) {
       // Shift children to the right to open space to add new node as a child.
@@ -144,7 +144,7 @@ public class BTreeNode {
    * @return
    */
   boolean hasSpace() {
-    return nodeSize < nf.getOrder();
+    return nodeSize < nf.order;
   }
 
   /**

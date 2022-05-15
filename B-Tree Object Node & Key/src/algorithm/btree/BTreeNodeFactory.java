@@ -14,10 +14,11 @@ import javax.management.RuntimeErrorException;
  */
 class BTreeNodeFactory {
   // Definition for all nodes created from this factory.
-  private int order;
-  private int leftNodeSize;
-  private int rightNodeSize;
-  private int middleNodePos;
+  // To avoid storing this same values in each node, saving space.
+  final int order;
+  final int leftNodeSize;
+  final int rightNodeSize;
+  final int middleNodePos;
 
   /**
    * Return a Node factory that creates nodes with the order size 'order'.
@@ -31,29 +32,17 @@ class BTreeNodeFactory {
 
     this.order = order;
 
-    //  For splitting the node.
+    // For splitting the node.
     leftNodeSize = (order - 1) / 2;
     rightNodeSize = (order - 1) - leftNodeSize;
     middleNodePos = leftNodeSize;
   }
 
+  /**
+   * 
+   * @return
+   */
   public BTreeNode getNewNode() {
     return new BTreeNode(this);
-  }
-
-  public int getOrder() {
-    return order;
-  }
-
-  public int getLeftNodeSize() {
-    return leftNodeSize;
-  }
-
-  public int getRightNodeSize() {
-    return rightNodeSize;
-  }
-
-  public int getMiddleNodePos() {
-    return middleNodePos;
   }
 }
